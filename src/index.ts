@@ -11,7 +11,18 @@ export const Server: DraymanServer = async ({ EventHub, app }) => {
     const bot = new Telegraf(tgToken);
     bot.launch();
     bot.on(message(), (ctx) => {
-        return ctx.reply(JSON.stringify(ctx.message));
+        return ctx.reply(`🎬 **Welcome to Movie Matcher!** 🎥
+
+Choose your genres and years, and **swipe through** our top movie picks. 
+
+To match with **friends**, share the **app link** - t.me/movie_matcher_bot/app.
+
+If you're in the mood for **solo** discovery, use the **menu button**. 
+
+When everyone **swipes right** on a movie, it's popcorn time! 
+
+Dive in and elevate your movie nights!
+`, { parse_mode: 'Markdown' });
     });
     const stages = {};
     const defaultStage = {

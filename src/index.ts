@@ -11,15 +11,15 @@ export const Server: DraymanServer = async ({ EventHub, app }) => {
     const bot = new Telegraf(tgToken);
     bot.launch();
     bot.on(message(), (ctx) => {
-        return ctx.replyWithMarkdownV2(`🎬 **Welcome to Movie Matcher!** 🎥
+        return ctx.replyWithHTML(`🎬 <b>Welcome to Movie Matcher!</b> 🎥
 
-Choose your genres and years, and **swipe through** our top movie picks. 
+Choose your genres and years, and <b>swipe through</b> our top movie picks. 
 
-To match with **friends**, share the **app link** - t.me/movie_matcher_bot/app.
+To match with <b>friends</b> share the <b>app link</b> - t.me/movie_matcher_bot/app.
 
-If you're in the mood for **solo** discovery, use the **menu button**. 
+If you're in the mood for <b>solo</b> discovery, use the <b>menu button</b> 
 
-When everyone **swipes right** on a movie, it's popcorn time! 
+When everyone <b>swipes right</b> on a movie, it's popcorn time! 
 
 Dive in and elevate your movie nights!
 `);
@@ -50,14 +50,14 @@ Dive in and elevate your movie nights!
             stage.selectedMovie = movies.find(movie => movie.id == unanimouslyLikedMovieId);
             newState = 'movieSelected';
             for (const user of stage.users) {
-                let text = `🍿 *Movie Match Alert!* 🍿
+                let text = `🍿 <b>Movie Match Alert!</b> 🍿
 
-Good news! You${stage.users.length > 1 ? ` and ${stage.users.filter(x => x.connectionId !== user.connectionId).map(x => x.user.username).join(', ')}` : ``} have matched on *${stage.selectedMovie.title}*! 🎬
+Good news! You${stage.users.length > 1 ? ` and ${stage.users.filter(x => x.connectionId !== user.connectionId).map(x => x.user.username).join(', ')}` : ``} have matched on <b>${stage.selectedMovie.title}</b>! 🎬
 
-Want to know more about it? Check out all the details [here](https://www.themoviedb.org/movie/${stage.selectedMovie.id}).
+Want to know more about this movie? Check out all the details <a href="https://www.themoviedb.org/movie/${stage.selectedMovie.id}">here</a>.
 
 Happy watching!`;
-                bot.telegram.sendMessage(user.user.id, text, { parse_mode: 'MarkdownV2' });
+                bot.telegram.sendMessage(user.user.id, text, { parse_mode: 'HTML' });
             }
         } else {
             const movieIdCounts = users

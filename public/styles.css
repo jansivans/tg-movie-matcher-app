@@ -1,0 +1,344 @@
+body {
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: default;
+    overflow: hidden;
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: center; */
+    flex-direction: column;
+    /* margin-top: 20px; */
+    margin: 0;
+    padding: 0;
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+        "Helvetica Neue", sans-serif;
+}
+
+.hint {
+    color: var(--tg-theme-hint-color);
+    font-size: 11px;
+}
+
+.option-header {
+    text-transform: uppercase;
+    font-size: 12px;
+    padding-bottom: 5px;
+}
+
+rg-swipi-card {
+    width: 100%;
+}
+
+.wrapper {
+    background-color: var(--tg-theme-secondary-bg-color);
+    border-radius: 15px;
+    box-shadow: 0 8px 0 rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    /* pointer-events: none; */
+}
+
+rg-swipi-cards {
+    width: 360px;
+}
+
+rg-swipi-card.moving-left .wrapper {
+    background-color: #e64d44;
+    /* color: #fff; */
+}
+
+rg-swipi-card.moving-right .wrapper {
+    background-color: #32b545;
+    /* color: #fff; */
+}
+
+.selected-movie {
+    /* background-color: #32b545; */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* gap: 10px; */
+    /* margin: 10px; */
+    width: 100%;
+    animation: appear 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.selected-movie .wrapper {
+    background-color: #32b545;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.wrapper img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    /* max-width: 320px; */
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); */
+    /* transition: all 0.3s cubic-bezier(.25, .8, .25, 1); */
+}
+
+.lottie-animation {
+    animation: appear 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    text-align: center;
+}
+
+lottie-player {
+    height: 200px;
+}
+
+.lottie-animation .overview {
+    margin: 10px;
+}
+
+.swipi-cards-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.selected-movie-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.title {
+    font-weight: bold;
+    height: 30px;
+    /* padding: 10px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.options-menu {
+    transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    margin: 20px;
+    overflow: auto;
+}
+
+.main-wrapper {
+    transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    overflow: auto;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.overview {
+    /* height: 140px; */
+    /* padding-top: 10px; */
+    transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+.selected-movie .overview {
+    height: 100vh;
+}
+
+.overview .content {
+    /* position: relative; */
+    overflow: hidden;
+    font-size: 11px;
+    /* height: 180px; */
+    /* width: 320px; */
+    padding: 0 10px;
+    /* white-space: nowrap; */
+    /* text-overflow: ellipsis; */
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    text-align: center;
+}
+
+.genre {
+    font-size: 12px;
+}
+
+.rating-circle {
+    position: absolute;
+    top: -10px;
+    /* Adjust this value to control the vertical position of the circle */
+    right: 5px;
+    /* Adjust this value to control the horizontal position of the circle */
+    width: 40px;
+    height: 40px;
+    /* background: white; */
+    color: #fff;
+    font-size: 12px;
+    /* Or any color you want */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    /* Adjust this value to control the font size of the text */
+}
+
+.selected-movie .fade-image {
+    overflow: unset;
+    position: relative;
+}
+
+.fade-image img {
+    display: block;
+    width: 100%;
+}
+
+.fade-image {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    overflow: hidden;
+    background:
+        linear-gradient(to top, var(--tg-theme-secondary-bg-color) 0%, rgba(0, 0, 0, 0) 70%),
+        var(--dynamic-bg-image) center center / cover no-repeat;
+}
+
+.moving-right .fade-image {
+    background:
+        linear-gradient(to top, #32b545 0%, rgba(0, 0, 0, 0) 70%),
+        var(--dynamic-bg-image) center center / cover no-repeat;
+}
+
+.moving-left .fade-image {
+    background:
+        linear-gradient(to top, #e64d44 0%, rgba(0, 0, 0, 0) 70%),
+        var(--dynamic-bg-image) center center / cover no-repeat;
+}
+
+.selected-movie .fade-image {
+    background:
+        linear-gradient(to top, #32b545 0%, rgba(0, 0, 0, 0) 70%),
+        var(--dynamic-bg-image) center center / cover no-repeat;
+}
+
+.select-wrapper {
+    padding-bottom: 10px;
+    transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.select {
+    border-bottom: 1px solid var(--tg-theme-bg-color);
+    padding: 10px 20px;
+    background-color: var(--tg-theme-secondary-bg-color);
+    display: flex;
+    align-items: center;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.select:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.select:last-child {
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.separator {
+    flex: 1;
+}
+
+.genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.button-text {
+    color: var(--tg-theme-button-color);
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for Firefox */
+html {
+    scrollbar-width: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+body {
+    -ms-overflow-style: none;
+}
+
+@keyframes slideFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.right-to-left-appear {
+    opacity: 0;
+    transform: translateX(100%);
+    animation-name: slideFromRight;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.left-to-right-appear {
+    opacity: 0;
+    transform: translateX(-100%);
+    animation-name: slideFromLeft;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}

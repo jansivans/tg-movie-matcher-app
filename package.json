@@ -1,0 +1,28 @@
+{
+  "name": "tg-movie-matcher-app",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "drayman-framework start"
+  },
+  "devDependencies": {
+    "@drayman/types": "latest",
+    "@types/node": "latest",
+    "typescript": "latest"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@drayman/framework": "latest",
+    "@lottiefiles/lottie-player": "2.0.2",
+    "chroma-js": "2.4.2",
+    "drayman-swipi-cards": "2.0.9",
+    "js-confetti": "0.11.0",
+    "lottie-web": "5.12.2",
+    "nanoid": "3.3.4",
+    "node-themoviedb": "0.2.8",
+    "string-pixel-width": "1.11.0",
+    "telegraf": "4.14.0"
+  }
+}

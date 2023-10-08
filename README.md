@@ -1,6 +1,63 @@
-# Telegram Movie Matcher App
+<div align="center">
 
-## Initialization with Drayman Framework
+<img src="docs/assets/main-pic.png" style="width: 250px;" />
+
+<h1>Telegram Movie Matcher App</h1>
+
+🎬 **Welcome to Movie Matcher!** 🎥
+
+Choose your genres and years, and **swipe through** our top movie picks.
+
+To match with **friends** share the app link - [t.me/movie_matcher_bot/app](https://t.me/movie_matcher_bot/app).
+
+If you're in the mood for **solo** discovery, use the **menu button**.
+
+When everyone **swipes right** on a movie, it's popcorn time!
+
+Dive in and elevate your movie nights!
+
+[Launch Movie Matcher App](https://t.me/movie_matcher_bot/app)
+
+</div>
+
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Tutorial](#tutorial)
+  - [Initialization with Drayman Framework](#initialization-with-drayman-framework)
+  - [Installing Necessary Packages](#installing-necessary-packages)
+  - [Modifying index.html, adding styles.css and assets](#modifying-indexhtml--adding-stylescss-and-assets)
+  - [Retrieving API Tokens](#retrieving-api-tokens)
+  - [Setting up ngrok for HTTPS Tunneling](#setting-up-ngrok-for-https-tunneling)
+  - [Integrating with Telegram](#integrating-with-telegram)
+  - [Adding Telegram Bot API Support](#adding-telegram-bot-api-support)
+  - [Defining the Movie Matcher app flow](#defining-the-movie-matcher-app-flow)
+  - [Setting up browser commands and events](#setting-up-browser-commands-and-events)
+  - [Validating user](#validating-user)
+  - [Sticker animation component](#sticker-animation-component)
+  - [Setting up server logic](#setting-up-server-logic)
+  - [Matching main component to server logic](#matching-main-component-to-server-logic)
+  - [Options button component](#options-button-component)
+  - [Options menu component](#options-menu-component)
+  - [Movie card component](#movie-card-component)
+  - [Final look at the main component](#final-look-at-the-main-component)
+    - [Setup screen and year/genre selection screens](#setup-screen-and-year-genre-selection-screens)
+    - [Matching screen and movie selected screen](#matching-screen-and-movie-selected-screen)
+    - [Waiting for others screen](#waiting-for-others-screen)
+    - [No movie selected screen](#no-movie-selected-screen)
+    - [No movies screen](#no-movies-screen)
+    - [Invalid data screen](#invalid-data-screen)
+  - [Reacting to viewport height change](#reacting-to-viewport-height-change)
+  - [Reacting to theme change](#reacting-to-theme-change)
+  - [Multiplayer usage](#multiplayer-usage)
+
+## Tutorial
+
+In this tutorial, we'll create a Telegram mini app that will allow users to match with movies. We'll use [Drayman framework](https://www.drayman.io/) to create this app and go trough some major features of Telegram mini apps.
+
+You can find the final code of this app here: [tg-movie-matcher-app](https://github.com/jansivans/tg-movie-matcher-app).
+
+### Initialization with Drayman Framework
 
 Let's start by initializing and starting new Drayman project:
 
@@ -14,7 +71,7 @@ npm start
 
 <img src="docs/assets/drayman-welcome-page.png" style="width: 500px" />
 
-## Installing Necessary Packages
+### Installing Necessary Packages
 
 Let's install all packages we'll need for this app:
 
@@ -30,7 +87,7 @@ Let's install all packages we'll need for this app:
 npm install telegraf@4.14.0 @lottiefiles/lottie-player@2.0.2 chroma-js@2.4.2 drayman-swipi-cards@2.0.9 js-confetti@0.11.0 nanoid@3.3.4 node-themoviedb@0.2.8 --save-exact
 ```
 
-## Modifying index.html, adding styles.css and assets
+### Modifying index.html, adding styles.css and assets
 
 Some packages we've installed require scripts to be added to `index.html` file. Also you'll need to add `telegram-web-app.js` script to enable Telegram mini app mode. Here is the final `index.html` file:
 
@@ -53,14 +110,14 @@ As you can see, we've also added `styles.css` file to `index.html`. Don't forget
 
 Create `stickers` folder in `public` folder and copy all stickers from this link: [stickers](https://github.com/jansivans/tg-movie-matcher-app/tree/main/public/stickers).
 
-## Retrieving API Tokens
+### Retrieving API Tokens
 
 Now let's retrieve required tokens for our app.
 
 - Telegram token - `BOT_TOKEN` - create a new bot using `/newbot` command in [BotFather](https://t.me/botfather) and copy the token.
 - The Movie Database API key - `MOVIE_DB_API_KEY` - create a new account on [The Movie Database](https://www.themoviedb.org/) and copy the API key from [API page](https://www.themoviedb.org/settings/api).
 
-## Setting up ngrok for HTTPS Tunneling
+### Setting up ngrok for HTTPS Tunneling
 
 One of the Telegram requirements is that web app must be hosted on HTTPS, so we'll use [ngrok](https://ngrok.com/) to create a tunnel to our local server. Install it and after that, I suggest you to create a ngrok account to create a static domain. This way you'll be able to use the same link to your app every time you start it. Here are official instructions on how to do it: [free static domain for all ngrok users](https://ngrok.com/blog-post/free-static-domains-ngrok-users).
 
@@ -74,13 +131,13 @@ In result, you'll see something like this:
 
 <img src="docs/assets/ngrok.png" style="width: 500px" />
 
-## Integrating with Telegram
+### Integrating with Telegram
 
 Copy this HTTPS link and using [BotFather](https://t.me/botfather) create a new app with `/newapp` command. When asked for a link to the app, paste the link you've copied from ngrok. As the short app name, you can simply type `app`. In result, you'll get a link to your app, something like this: `t.me/movie_matcher_test_bot/app`.
 
 We can also add menu button to our bot to launch our app. To do this, go to [BotFather](https://t.me/botfather) and select your bot. Then select `Bot Settings` and then `Menu Button`, `Configure menu button`. Send him a link you got from ngrok. After that, you'll be able to launch your app by clicking on the menu button in your bot. However, we haven't added Telegram bot API support to our app yet, so it won't work. Let's do it now.
 
-## Adding Telegram Bot API Support
+### Adding Telegram Bot API Support
 
 Let's integrate Telegram bot API support to our app now. Create a new [Server](https://www.drayman.io/docs/components-in-depth/helpers/the-server-object) `index.ts` file in `src` folder and add the following code to it:
 
@@ -510,37 +567,37 @@ Main screen where user can select genres and years and see connected users. It m
 
 <img src="docs/assets/setup-screen.gif" style="width: 300px" />
 
-### Matching screen and movie selected screen
+#### Matching screen and movie selected screen
 
 Matching screen is a screen where user can swipe movie cards. If all users swipe right on the same movie, confetti animation will be shown, notifcation message will be sent from the bot and users will see the **movie selected screen**:
 
 <img src="docs/assets/matching-screen.gif" style="width: 300px" />
 
-### Waiting for others screen
+#### Waiting for others screen
 
 When user made selection and there are no more movies to swipe and other users haven't made their selection yet, user will see the **waiting for others screen**:
 
 <img src="docs/assets/waiting-screen.png" style="width: 500px" />
 
-### No movie selected screen
+#### No movie selected screen
 
 When all users made selection and haven't matched with any movie, users will see the **no movie selected screen**:
 
 <img src="docs/assets/no-movie-selected.png" style="width: 500px" />
 
-### No movies screen
+#### No movies screen
 
 When user clicks "Start" button, and there are no movies with selected genres and years, user will see the **no movies screen**:
 
 <img src="docs/assets/no-movie-found.png" style="width: 500px" />
 
-### Invalid data screen
+#### Invalid data screen
 
 When user can't be [validated](https://core.telegram.org/bots/webapps#validating-data-received-via-the-mini-app), **failed validation screen** will be shown:
 
 <img src="docs/assets/invalid-data.png" style="width: 500px" />
 
-## Reacting to viewport height change
+### Reacting to viewport height change
 
 Some of components are using viewport height which is received from Telegram API. You can see method which returns viewport height in `index.html` file:
 
@@ -567,13 +624,13 @@ Then, it is passed to some components as a prop and height of elements is calcul
 
 <img src="docs/assets/viewport-change.gif" style="width: 300px" />
 
-## Reacting to theme change
+### Reacting to theme change
 
 Because all component styles are built aroun [Telegram CSS variables](https://core.telegram.org/bots/webapps#themeparams), our app will automatically change its style when user changes theme:
 
 <img src="docs/assets/theme-change.gif" style="width: 300px" />
 
-## Multiplayer usage
+### Multiplayer usage
 
 If a link to the app (in our case it is `t.me/movie_matcher_test_bot/app`) is sent to a chat, all users who open this link within the same chat will be added to the same group. This way, users can match with each other. If a user opens the app link in a different chat, he will be added to a different group. This way, users can match with different people in different chats:
 

@@ -50,6 +50,7 @@ Dive in and elevate your movie nights!
   - [Reacting to viewport height change](#reacting-to-viewport-height-change)
   - [Reacting to theme change](#reacting-to-theme-change)
   - [Multiplayer usage](#multiplayer-usage)
+- [Publishing the app](#publishing-the-app)
 
 ## Tutorial
 
@@ -635,3 +636,17 @@ Because all component styles are built aroun [Telegram CSS variables](https://co
 If a link to the app (in our case it is `t.me/movie_matcher_test_bot/app`) is sent to a chat, all users who open this link within the same chat will be added to the same group. This way, users can match with each other. If a user opens the app link in a different chat, he will be added to a different group. This way, users can match with different people in different chats:
 
 <img src="docs/assets/multiplayer.gif" style="width: 600px" />
+
+## Publishing the app
+
+The easiest way to publish you app is to use [render](https://render.com). While they offer a free plan, it's not ideal for Telegram apps since it suspends them after periods of inactivity. However, their first paid plan is just $7/month, which is suitable for hosting small Telegram apps without significant traffic.
+
+Some tips of publishing your app on render:
+
+- Don't forget to add `BOT_TOKEN` and `MOVIE_DB_API_KEY` environment variables. Also you'll need to add `PORT` environment variable and set it to `3033`:
+
+<img src="docs/assets/render.png" style="width: 500px" />
+
+- You'll also need to use `npm install` as build command and `npm run start` as start command:
+
+<img src="docs/assets/render-commands.png" style="width: 500px" />

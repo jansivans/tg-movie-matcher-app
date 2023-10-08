@@ -23,6 +23,7 @@ Dive in and elevate your movie nights!
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
+- [Start the app](#start-the-app)
 - [Tutorial](#tutorial)
   - [Initialization with Drayman Framework](#initialization-with-drayman-framework)
   - [Installing Necessary Packages](#installing-necessary-packages)
@@ -51,6 +52,24 @@ Dive in and elevate your movie nights!
   - [Reacting to theme change](#reacting-to-theme-change)
   - [Multiplayer usage](#multiplayer-usage)
 - [Publishing the app](#publishing-the-app)
+- [Future improvements](#future-improvements)
+
+## Start the app
+
+If you don't want to go trough the tutorial and create this app from scratch, you can simply start the app by following these steps:
+
+- Clone this repository.
+- Install dependencies: `npm install`.
+- Follow [Retrieving API Tokens](#retrieving-api-tokens).
+- Follow [Setting up ngrok for HTTPS Tunneling](#setting-up-ngrok-for-https-tunneling).
+- Follow [Integrating with Telegram](#integrating-with-telegram).
+- Start an app, providing required tokens as environment variables:
+
+```bash
+MOVIE_DB_API_KEY=<your-movie-db-token> BOT_TOKEN=<your-telegram-token> npm start
+```
+
+Make sure that you use your own link to the app in the welcome message in `src/index.ts` file.
 
 ## Tutorial
 
@@ -59,6 +78,8 @@ In this tutorial, we'll create a Telegram mini app that will allow users to matc
 You can find the final code of this app here: [tg-movie-matcher-app](https://github.com/jansivans/tg-movie-matcher-app).
 
 ### Initialization with Drayman Framework
+
+Drayman Framework was chosen for the Telegram Mini App development because of its fast setup and unified full-stack development - combining server and client side inside components. It is also very easy to use and has a lot of features that are useful for Telegram Mini Apps.
 
 Let's start by initializing and starting new Drayman project:
 
@@ -566,13 +587,13 @@ Now we have everything set up. Let's check how our main component looks like.
 
 Main screen where user can select genres and years and see connected users. It matches Telegram UI style and matches user's theme color. It also has transition animation when user navigates between screens:
 
-<img src="docs/assets/setup-screen.gif" style="width: 300px" />
+<img src="docs/assets/setup-screen.gif" style="width: 400px" />
 
 #### Matching screen and movie selected screen
 
 Matching screen is a screen where user can swipe movie cards. If all users swipe right on the same movie, confetti animation will be shown, notifcation message will be sent from the bot and users will see the **movie selected screen**:
 
-<img src="docs/assets/matching-screen.gif" style="width: 300px" />
+<img src="docs/assets/matching-screen.gif" style="width: 400px" />
 
 #### Waiting for others screen
 
@@ -623,13 +644,13 @@ onViewportChanged: async (data) => {
 
 Then, it is passed to some components as a prop and height of elements is calculated based on it. This way we can make our app responsive to viewport height change and also hide or show some elements based on viewport height:
 
-<img src="docs/assets/viewport-change.gif" style="width: 300px" />
+<img src="docs/assets/viewport-change.gif" style="width: 400px" />
 
 ### Reacting to theme change
 
 Because all component styles are built aroun [Telegram CSS variables](https://core.telegram.org/bots/webapps#themeparams), our app will automatically change its style when user changes theme:
 
-<img src="docs/assets/theme-change.gif" style="width: 300px" />
+<img src="docs/assets/theme-change.gif" style="width: 400px" />
 
 ### Multiplayer usage
 
@@ -645,8 +666,13 @@ Some tips of publishing your app on render:
 
 - Don't forget to add `BOT_TOKEN` and `MOVIE_DB_API_KEY` environment variables. Also you'll need to add `PORT` environment variable and set it to `3033`:
 
-<img src="docs/assets/render.png" style="width: 500px" />
+<img src="docs/assets/render.png" style="width: 600px" />
 
 - You'll also need to use `npm install` as build command and `npm run start` as start command:
 
-<img src="docs/assets/render-commands.png" style="width: 500px" />
+<img src="docs/assets/render-commands.png" style="width: 600px" />
+
+## Future improvements
+
+- Add more movie search options (actors, directors, countries, etc.).
+- Add multiple language support.

@@ -7,10 +7,7 @@ body {
     cursor: default;
     overflow: hidden;
     display: flex;
-    /* align-items: center; */
-    /* justify-content: center; */
     flex-direction: column;
-    /* margin-top: 20px; */
     margin: 0;
     padding: 0;
     background-color: var(--tg-theme-bg-color);
@@ -42,7 +39,6 @@ rg-swipi-card {
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    /* pointer-events: none; */
 }
 
 rg-swipi-cards {
@@ -51,21 +47,13 @@ rg-swipi-cards {
 
 rg-swipi-card.moving-left .wrapper {
     background-color: #e64d44;
-    /* color: #fff; */
 }
 
 rg-swipi-card.moving-right .wrapper {
     background-color: #32b545;
-    /* color: #fff; */
 }
 
 .selected-movie {
-    /* background-color: #32b545; */
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* align-items: center; */
-    /* gap: 10px; */
-    /* margin: 10px; */
     width: 100%;
     animation: appear 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -94,11 +82,8 @@ rg-swipi-card.moving-right .wrapper {
     object-fit: cover;
     width: 100%;
     height: auto;
-    /* max-width: 320px; */
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); */
-    /* transition: all 0.3s cubic-bezier(.25, .8, .25, 1); */
 }
 
 .lottie-animation {
@@ -156,13 +141,10 @@ lottie-player {
 }
 
 .overview {
-    /* height: 140px; */
-    /* padding-top: 10px; */
     transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1);
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
 }
 
 .selected-movie .overview {
@@ -170,16 +152,10 @@ lottie-player {
 }
 
 .overview .content {
-    /* position: relative; */
     overflow: hidden;
     font-size: 11px;
-    /* height: 180px; */
-    /* width: 320px; */
     padding: 0 10px;
-    /* white-space: nowrap; */
-    /* text-overflow: ellipsis; */
     display: flex;
-    /* align-items: center; */
     justify-content: center;
     text-align: center;
 }
@@ -191,21 +167,16 @@ lottie-player {
 .rating-circle {
     position: absolute;
     top: -10px;
-    /* Adjust this value to control the vertical position of the circle */
     right: 5px;
-    /* Adjust this value to control the horizontal position of the circle */
     width: 40px;
     height: 40px;
-    /* background: white; */
     color: #fff;
     font-size: 12px;
-    /* Or any color you want */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1;
-    /* Adjust this value to control the font size of the text */
 }
 
 .selected-movie .fade-image {
@@ -290,17 +261,14 @@ lottie-player {
     color: var(--tg-theme-button-color);
 }
 
-/* Hide scrollbar for Chrome, Safari, and Opera */
 ::-webkit-scrollbar {
     display: none;
 }
 
-/* Hide scrollbar for Firefox */
 html {
     scrollbar-width: none;
 }
 
-/* Hide scrollbar for IE and Edge */
 body {
     -ms-overflow-style: none;
 }

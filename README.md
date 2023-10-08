@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/assets/main-pic.png" style="width: 250px;" />
+<img src="docs/assets/multiplayer.gif" style="width: 600px" />
 
 <h1>Telegram Movie Matcher App</h1>
 
@@ -53,7 +53,7 @@ Dive in and elevate your movie nights!
 
 ## Tutorial
 
-In this tutorial, we'll create a Telegram mini app that will allow users to match with movies. We'll use [Drayman framework](https://www.drayman.io/) to create this app and go trough some major features of Telegram mini apps.
+In this tutorial, we'll create a Telegram mini app that will allow users to match with movies. We'll use [Drayman framework](https://www.drayman.io/) to create this app and go trough some major features of Telegram mini apps. You can use first steps from this tutorial as a boilerplate for your own Telegram mini app.
 
 You can find the final code of this app here: [tg-movie-matcher-app](https://github.com/jansivans/tg-movie-matcher-app).
 

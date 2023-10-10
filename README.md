@@ -16,7 +16,7 @@ When everyone **swipes right** on a movie, it's popcorn time!
 
 Dive in and elevate your movie nights!
 
-[Launch Movie Matcher App](https://t.me/movie_matcher_bot/app)
+[Launch Movie Matcher Bot](https://t.me/movie_matcher_bot) · [Launch Movie Matcher App](https://t.me/movie_matcher_bot/app)
 
 </div>
 

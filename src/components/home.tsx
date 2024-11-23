@@ -1,11 +1,11 @@
 import { nanoid } from 'nanoid';
-import { genres, yearOptions, verifyInitData } from '../utils';
+import { verifyInitData } from '../utils';
 
 export const component: DraymanComponent = async ({ Browser, ComponentInstance, EventHub, forceUpdate, Server }) => {
     const data = await Browser.getTelegramData();
     const initData = data.initDataUnsafe;
     initData.connectionId = nanoid();
-    let optionState: 'genre' | 'year';
+    let optionState: 'tool' | 'location';
     let stage;
     let cardsFinished = false;
     let previousState;
@@ -31,14 +31,14 @@ export const component: DraymanComponent = async ({ Browser, ComponentInstance, 
                 cardsFinished = false;
                 await Browser.setMainButtonParams({ text: 'Start', is_visible: true, });
                 await Browser.setBackButtonVisibility({ visible: !!optionState });
-            } else if (stage.state === 'movieSelection') {
+            } else if (stage.state === 'miningSimulation') {
                 optionState = null;
                 await Browser.setMainButtonParams({ is_visible: false, });
                 await Browser.setBackButtonVisibility({ visible: true });
-            } else if (stage.state === 'movieSelected') {
+            } else if (stage.state === 'miningCompleted') {
                 await Browser.explode();
                 await Browser.setBackButtonVisibility({ visible: true });
-            } else if (stage.state === 'movieNotSelected') {
+            } else if (stage.state === 'miningNotCompleted') {
                 await Browser.setBackButtonVisibility({ visible: true });
             }
             previousState = stage.state;
@@ -56,7 +56,7 @@ export const component: DraymanComponent = async ({ Browser, ComponentInstance, 
 
     Browser.events({
         onMainButtonClick: async () => {
-            await Server.startMovieSelection({ initData });
+            await Server.startMiningSimulation({ initData });
         },
         onBackButtonClick: async () => {
             if (stage.state === 'setup') {
@@ -79,19 +79,19 @@ export const component: DraymanComponent = async ({ Browser, ComponentInstance, 
             return <></>;
         }
 
-        if (stage.state === 'movieNotSelected') {
+        if (stage.state === 'miningNotCompleted') {
             return <lottieAnimation
                 src="stickers/crying.json"
-                title="Cinema Standstill!"
-                overview="It looks like a consensus wasn't reached on a movie choice. No worries! Tap 'Back' and try tweaking your search options for a better result!"
+                title="Mining Standstill!"
+                overview="It looks like a consensus wasn't reached on a mining option. No worries! Tap 'Back' and try tweaking your options for a better result!"
             />
         }
 
-        if (stage.state === 'movieSelection' && !stage.movies.length) {
+        if (stage.state === 'miningSimulation' && !stage.miningOptions.length) {
             return <lottieAnimation
                 src="stickers/not_found.json"
-                title="Oops, No Flicks Found!"
-                overview="We couldn't find any movies matching your search. Tap 'Back' and try tweaking your search options for a better result!"
+                title="Oops, No Mining Options Found!"
+                overview="We couldn't find any mining options matching your search. Tap 'Back' and try tweaking your options for a better result!"
             />
         }
 
@@ -100,22 +100,22 @@ export const component: DraymanComponent = async ({ Browser, ComponentInstance, 
                 <div class="main-wrapper left-to-right-appear" style={{ height: `${viewportHeight}px` }}>
                     <lottieAnimation src="stickers/main.json" />
                     <div class="main">
-                        <div class="option-header">Movie options</div>
+                        <div class="option-header">Mining options</div>
                         <div class="select-wrapper">
                             <optionsButton
-                                buttonLabel="Genre"
-                                selectedLabel={stage.movieOptions.genre.name}
+                                buttonLabel="Tool"
+                                selectedLabel={stage.miningOptions.tool.name}
                                 onSelect={async () => {
-                                    optionState = 'genre';
+                                    optionState = 'tool';
                                     await Browser.setBackButtonVisibility({ visible: true });
                                     await forceUpdate();
                                 }}
                             />
                             <optionsButton
-                                buttonLabel="Year"
-                                selectedLabel={stage.movieOptions.year.name}
+                                buttonLabel="Location"
+                                selectedLabel={stage.miningOptions.location.name}
                                 onSelect={async () => {
-                                    optionState = 'year';
+                                    optionState = 'location';
                                     await Browser.setBackButtonVisibility({ visible: true });
                                     await forceUpdate();
                                 }}
@@ -134,39 +134,39 @@ export const component: DraymanComponent = async ({ Browser, ComponentInstance, 
             )
         }
 
-        if (stage.state === 'setup' && optionState === 'genre') {
+        if (stage.state === 'setup' && optionState === 'tool') {
             return <optionsMenu
-                header="Genre"
-                options={genres}
+                header="Tool"
+                options={tools}
                 viewportHeight={viewportHeight}
-                onSelect={async ({ value }) => await Server.changeMovieOption({ initData, option: 'genre', value })}
-                selectedOption={stage.movieOptions.genre}
+                onSelect={async ({ value }) => await Server.changeMiningOption({ initData, option: 'tool', value })}
+                selectedOption={stage.miningOptions.tool}
             />
         }
 
-        if (stage.state === 'setup' && optionState === 'year') {
+        if (stage.state === 'setup' && optionState === 'location') {
             return <optionsMenu
-                header="Year"
-                options={yearOptions}
+                header="Location"
+                options={locations}
                 viewportHeight={viewportHeight}
-                onSelect={async ({ value }) => await Server.changeMovieOption({ initData, option: 'year', value })}
-                selectedOption={stage.movieOptions.year}
+                onSelect={async ({ value }) => await Server.changeMiningOption({ initData, option: 'location', value })}
+                selectedOption={stage.miningOptions.location}
             />
         }
 
-        if (stage.state === 'movieSelection' && !!stage.movies.length) {
+        if (stage.state === 'miningSimulation' && !!stage.miningOptions.length) {
             return (
                 <div>
                     <div class="swipi-cards-wrapper">
-                        <rg-swipi-cards onScStackFinish={[async () => { cardsFinished = true; await forceUpdate(); }, { debounce: 1000 }]}>
+                        <rg-swipi-cards onScStackFinish={[async () => { cardsFinished = true; await forceUpdate(); }, { debounce: 1000 }]} >
                             {
-                                stage.movies.map((movie) => {
+                                stage.miningOptions.map((option) => {
                                     return (
                                         <rg-swipi-card
-                                            onScSwipeLeft={async () => await Server.rateMovie({ movieId: movie.id, initData, isLike: false })}
-                                            onScSwipeRight={async () => await Server.rateMovie({ movieId: movie.id, initData, isLike: true })}
+                                            onScSwipeLeft={async () => await Server.rateMiningOption({ optionId: option.id, initData, isLike: false })}
+                                            onScSwipeRight={async () => await Server.rateMiningOption({ optionId: option.id, initData, isLike: true })}
                                         >
-                                            <movieCard movie={movie} viewportHeight={viewportHeight} />
+                                            <miningCard miningOption={option} viewportHeight={viewportHeight} />
                                         </rg-swipi-card>
                                     )
                                 })
@@ -177,22 +177,21 @@ export const component: DraymanComponent = async ({ Browser, ComponentInstance, 
                         (!!cardsFinished) && <lottieAnimation
                             src="stickers/waiting.json"
                             title="Hold Tight!"
-                            overview="We're waiting for others to finalize their movie picks. Grab some popcorn and we'll be ready soon!"
+                            overview="We're waiting for others to finalize their mining picks. Grab some coffee and we'll be ready soon!"
                         />
                     }
                 </div>
             )
         }
 
-        if (stage.state === 'movieSelected') {
+        if (stage.state === 'miningCompleted') {
             return (
-                <div class="selected-movie-wrapper">
-                    <div class="selected-movie">
-                        <movieCard movie={stage.selectedMovie} viewportHeight={viewportHeight} />
+                <div class="selected-mining-wrapper">
+                    <div class="selected-mining">
+                        <miningCard miningOption={stage.selectedMiningOption} viewportHeight={viewportHeight} />
                     </div>
                 </div>
             )
         }
     }
 }
-

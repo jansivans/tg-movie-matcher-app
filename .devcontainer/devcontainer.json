@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "test": "echo \"No tests defined for this project.\"",
+    "build": "npm install",
+    "launch": "npm install && MOVIE_DB_API_KEY=<your-movie-db-token> BOT_TOKEN=<your-telegram-token> npm start"
+  }
+}

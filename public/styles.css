@@ -10,14 +10,14 @@ body {
     flex-direction: column;
     margin: 0;
     padding: 0;
-    background-color: var(--tg-theme-bg-color);
-    color: var(--tg-theme-text-color);
+    background-color: #1e1e1e;
+    color: #f0f0f0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
         "Helvetica Neue", sans-serif;
 }
 
 .hint {
-    color: var(--tg-theme-hint-color);
+    color: #a0a0a0;
     font-size: 11px;
 }
 
@@ -32,7 +32,7 @@ rg-swipi-card {
 }
 
 .wrapper {
-    background-color: var(--tg-theme-secondary-bg-color);
+    background-color: #2e2e2e;
     border-radius: 15px;
     box-shadow: 0 8px 0 rgba(0, 0, 0, 0.4);
     display: flex;
@@ -116,7 +116,6 @@ lottie-player {
 .title {
     font-weight: bold;
     height: 30px;
-    /* padding: 10px; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -197,7 +196,7 @@ lottie-player {
     border-top-right-radius: 15px;
     overflow: hidden;
     background:
-        linear-gradient(to top, var(--tg-theme-secondary-bg-color) 0%, rgba(0, 0, 0, 0) 70%),
+        linear-gradient(to top, #2e2e2e 0%, rgba(0, 0, 0, 0) 70%),
         var(--dynamic-bg-image) center center / cover no-repeat;
 }
 
@@ -225,9 +224,9 @@ lottie-player {
 }
 
 .select {
-    border-bottom: 1px solid var(--tg-theme-bg-color);
+    border-bottom: 1px solid #1e1e1e;
     padding: 10px 20px;
-    background-color: var(--tg-theme-secondary-bg-color);
+    background-color: #2e2e2e;
     display: flex;
     align-items: center;
 }
@@ -258,7 +257,7 @@ lottie-player {
 }
 
 .button-text {
-    color: var(--tg-theme-button-color);
+    color: #32b545;
 }
 
 ::-webkit-scrollbar {
